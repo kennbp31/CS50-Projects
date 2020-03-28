@@ -15,7 +15,7 @@ int main(void)
     int words = spaces(input, length);
     
     
-    for (int l = 0; l < length; l++ )
+    for (int l = 0; l < length; l++)
     {
         if ((input[l] >= 'a' && input[l] <= 'z') || (input[l] >= 'A' && input[l] <= 'Z'))
         {
@@ -23,7 +23,7 @@ int main(void)
         }
     }
     
-    for (int s = 0; s < length; s++ )
+    for (int s = 0; s < length; s++)
     {
         if (input[s] == '.' || input[s] == '?' || input[s] == '!')
         {
@@ -34,11 +34,12 @@ int main(void)
     //letters / words * 100 = letters per 100 words
     //sentences / words * 100 = sentences per 100 words
     // final formula: 0.0588 * L - 0.296 * S - 15.8
-    float grade = ((0.0588 * (((float) letters / (float) words) * 100))  - (0.296 * (((float) sentences / (float) words) * 100)) - 15.8);
+    float grade = ((0.0588 * (((float) letters / (float) words) * 100))  - (0.296 * (((float) sentences /
+                   (float) words) * 100)) - 15.8);
     
-   // printf("%i letter(s)\n", letters);
-   // printf("%i word(s)\n", words);
-   // printf("%i sentence(s)\n", sentences);
+    // printf("%i letter(s)\n", letters);
+    // printf("%i word(s)\n", words);
+    // printf("%i sentence(s)\n", sentences);
     
     if (grade < 1)
     {
@@ -52,7 +53,7 @@ int main(void)
     
     else
     {
-         printf("Grade %.0f\n", round(grade));
+        printf("Grade %.0f\n", round(grade));
     }
    
 
@@ -63,7 +64,7 @@ int main(void)
 int spaces(string in, int len)// Function to determine the number of words!!
 {
     int s = 1;
-    for (int i = 0; i < len; i++ )
+    for (int i = 0; i < len; i++)
     {
         if (in[i] == ' ')
         {
