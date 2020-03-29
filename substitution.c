@@ -14,10 +14,11 @@ int main(int argc, string argv[])
 
     int length = strlen(argv[1]); //count length of string provided in command line
     string input = argv[1]; //prepare input string for manipulation
-  //  printf("%i total length\n", length);//letter count check
+    //  printf("%i total length\n", length);//letter count check
     int letters = 0;//variable used to count the number of good characters
     string lower = input;
     string upper = input;
+    int dups = 0;
 
 
     //convert input cipher to upper and lower case
@@ -37,7 +38,28 @@ int main(int argc, string argv[])
         printf("Key must contain 26 characters.\n");
         return 1;
     }
-
+    
+    for (int i = 0; i < length; i++)// duplicate letter check
+    {
+        dups = 0;
+        for (int l = 0; l < length; l++)
+        {
+            if (input[i] == input[l])
+            {
+               dups++; 
+            }
+            
+        }
+        if (dups > 1)
+            {
+                printf("Key must not contain more than 1 of the same letter\n");
+                return 1;
+            }
+        //copy each letter into 2 separate arrays
+        //check the first letter and compare it to each letter
+        //if it matches one of the letters count 1
+        //if if count > 1 at end of loop, return 1
+    }
 
     //printf("Good Key\n");
     string plain = get_string("plaintext: ");//collect text to convert
@@ -54,8 +76,8 @@ int main(int argc, string argv[])
     //printf("%i\n", A);
 
     printf("ciphertext: ");
-    
-    
+
+
     for (int i = 0; i < ln; i++)
     {
         cletter = 0;
@@ -70,12 +92,12 @@ int main(int argc, string argv[])
                 {
                  cletter++;
                 }
-            
+
             for (int j = 0; lower[j]; j++)
             {
                 lower[j] = tolower(lower[j]);
              }
-             
+
             printf("%c", lower[cletter]);
         }
         else if (plainint >= A && plainint <= Z)
