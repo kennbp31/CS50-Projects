@@ -25,13 +25,13 @@ int main(int argc, string argv[])
 
     for (int i = 0; i < length; i++) //loop to ensure that the characters are not numbers or other bull
     {
-         if ((input[i] >= 'a' && input[i] <= 'z') || (input[i] >= 'A' && input[i] <= 'Z'))
+        if ((input[i] >= 'a' && input[i] <= 'z') || (input[i] >= 'A' && input[i] <= 'Z'))
         {
             letters++;
         }
     }
 
-   // printf("%i Total letters\n", letters); //Character Check
+    // printf("%i Total letters\n", letters); //Character Check
 
     if ((length != letters) || (letters != 26)) //compare string length and number of actual letters provided
     {
@@ -46,19 +46,16 @@ int main(int argc, string argv[])
         {
             if (input[i] == input[l])
             {
-               dups++; 
+                dups++; 
             }
             
         }
         if (dups > 1)
-            {
-                printf("Key must not contain more than 1 of the same letter\n");
-                return 1;
-            }
-        //copy each letter into 2 separate arrays
-        //check the first letter and compare it to each letter
-        //if it matches one of the letters count 1
-        //if if count > 1 at end of loop, return 1
+        {
+            printf("Key must not contain more than 1 of the same letter\n");
+            return 1;
+        }
+
     }
 
     //printf("Good Key\n");
@@ -83,42 +80,41 @@ int main(int argc, string argv[])
         cletter = 0;
         plainint = 0;
         plainint = plain[i];
-       // printf("%i\n", plainint);
+        // printf("%i\n", plainint);
 
         if (plainint >= al && plainint <= zl)
-        //
         {
             while (plain[i] != standard[cletter])
-                {
-                 cletter++;
-                }
+            {
+                cletter++;
+            }
 
             for (int j = 0; lower[j]; j++)
             {
                 lower[j] = tolower(lower[j]);
-             }
+            }
 
             printf("%c", lower[cletter]);
         }
         else if (plainint >= A && plainint <= Z)
         {
             while (plain[i] != ucasestnd[cletter])
-                {
-                 cletter++;
-                }
+            {
+                cletter++;
+            }
             for (int k = 0; upper[k]; k++)
             {
                 upper[k] = toupper(upper[k]);
-              }
+            }
 
             printf("%c", upper[cletter]);
         }
 
         else
         {
-        printf("%c", plain[i]);
+            printf("%c", plain[i]);
         }
     }
-     printf("\n");
-     return 0;
+    printf("\n");
+    return 0;
 }
