@@ -132,9 +132,7 @@ bool vote(int voter, int rank, string name)
     {
         if (strcmp(candidates[k].name, name) == 0)
         {
-            //printf("%i,\n ", ranks[k]);
             preferences[voter][rank] = k;
-            //printf("%s %s %i %i\n",candidates[k], name, ranks[k], rank);
             return true;
         }
     }
@@ -144,7 +142,16 @@ bool vote(int voter, int rank, string name)
 // Tabulate votes for non-eliminated candidates
 void tabulate(void)
 {
-    // TODO
+    for (int i = 0; i < candidate_count; i++)
+    {
+        for (int j = 0; j < voter_count; j++)
+        {
+            if (preferences[j][0] == i && candidates[i].eliminated == false)
+            {
+                candidates[i].votes++;
+            }
+        }
+    }
     return;
 }
 
