@@ -66,12 +66,12 @@ void sepia(int height, int width, RGBTRIPLE image[height][width])
 // Reflect image horizontally
 void reflect(int height, int width, RGBTRIPLE image[height][width])
 {
-     int temp_r;
-     int temp_g;
-     int temp_b;
-     int temp_r1;
-     int temp_g1;
-     int temp_b1;
+    int temp_r;
+    int temp_g;
+    int temp_b;
+    int temp_r1;
+    int temp_g1;
+    int temp_b1;
 
 
     for (int i = 0; i < height; i++)
@@ -107,18 +107,6 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
     int temp_g[height][width];
     int temp_b[height][width];
     RGBTRIPLE copy[height][width];
-    //for (int x = 0; x < height; x++)
-    //{
-
-        //for (int y = 0; y < width - 1; y++)
-        //{
-            //temp_r[x][y] = image[x][y].rgbtRed;
-            //temp_g[x][y] = image[x][y].rgbtGreen;
-            //temp_b[x][y] = image[x][y].rgbtBlue;
-        //}
-
-    //}
-
 
     count = 0;
     for (int i = 0; i < height; i++)
@@ -160,9 +148,9 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
 
         for (int j = 0; j < width; j++)
         {
-            image[i][j].rgbtRed=copy[i][j].rgbtRed;
-            image[i][j].rgbtGreen=copy[i][j].rgbtGreen;
-            image[i][j].rgbtBlue=copy[i][j].rgbtBlue;
+            image[i][j].rgbtRed = copy[i][j].rgbtRed;
+            image[i][j].rgbtGreen = copy[i][j].rgbtGreen;
+            image[i][j].rgbtBlue = copy[i][j].rgbtBlue;
         }
         
     }
