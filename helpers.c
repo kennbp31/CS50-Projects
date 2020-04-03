@@ -103,28 +103,45 @@ void reflect(int height, int width, RGBTRIPLE image[height][width])
 void blur(int height, int width, RGBTRIPLE image[height][width])
 {
     int sum_r, sum_g, sum_b, count;
-    count = 0;
-    for (int i = 0; i < height; i = i + 3)
+    int temp_r[height][width];
+    int temp_g[height][width];
+    int temp_b[height][width];
+    
+    for (int x = 0; x < height; x++)
     {       
             
-        for (int j = 0; j < width - 1; j = j + 3)
+        for (int y = 0; y < width - 1; y++)
+        {
+            temp_r[x][y] = image[x][y].rgbtRed;
+            temp_g[x][y] = image[x][y].rgbtGreen;
+            temp_b[x][y] = image[x][y].rgbtBlue;
+        }
+            
+    }
+    
+  
+    count = 0;
+    for (int i = 0; i < height; i++)
+    {       
+            
+        for (int j = 0; j < width - 1; j++)
         {
             count = 0;
             sum_r = 0;
             sum_g = 0;
             sum_b = 0;
             
-            for (int k = i - 1; k < i + 2 || k == height; k++)
+            for (int k = i - 1; k < i + 2 && k < height; k++)
             {
                 if (k >= 0)
                 {
-                    for (int l = j - 1; l < j + 2 || l == width - 1; l++)
+                    for (int l = j - 1; l < j + 2 && l < width - 1; l++)
                     {
                         if (l >= 0)
                         {
-                            sum_r = sum_r + image[k][l].rgbtRed;
-                            sum_g = sum_g + image[k][l].rgbtGreen;
-                            sum_b = sum_b + image[k][l].rgbtBlue;
+                            sum_r += temp_r[k][l];
+                            sum_g +=temp_g[k][l];
+                            sum_b += temp_b[k][l];
                             count++;
                         }
                         
