@@ -72,7 +72,7 @@ void reflect(int height, int width, RGBTRIPLE image[height][width])
      int temp_r1;
      int temp_g1;
      int temp_b1;
-    
+
 
     for (int i = 0; i < height; i++)
     {
@@ -81,7 +81,7 @@ void reflect(int height, int width, RGBTRIPLE image[height][width])
             temp_r = image[i][k].rgbtRed;
             temp_g = image[i][k].rgbtGreen;
             temp_b = image[i][k].rgbtBlue;
-            
+
             temp_r1 = image[i][l].rgbtRed;
             temp_g1 = image[i][l].rgbtGreen;
             temp_b1 = image[i][l].rgbtBlue;
@@ -106,31 +106,31 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
     int temp_r[height][width];
     int temp_g[height][width];
     int temp_b[height][width];
-    
-    for (int x = 0; x < height; x++)
-    {       
-            
-        for (int y = 0; y < width - 1; y++)
-        {
-            temp_r[x][y] = image[x][y].rgbtRed;
-            temp_g[x][y] = image[x][y].rgbtGreen;
-            temp_b[x][y] = image[x][y].rgbtBlue;
-        }
-            
-    }
-    
-  
+    RGBTRIPLE copy[height][width];
+    //for (int x = 0; x < height; x++)
+    //{
+
+        //for (int y = 0; y < width - 1; y++)
+        //{
+            //temp_r[x][y] = image[x][y].rgbtRed;
+            //temp_g[x][y] = image[x][y].rgbtGreen;
+            //temp_b[x][y] = image[x][y].rgbtBlue;
+        //}
+
+    //}
+
+
     count = 0;
     for (int i = 0; i < height; i++)
-    {       
-            
+    {
+
         for (int j = 0; j < width - 1; j++)
         {
             count = 0;
             sum_r = 0;
             sum_g = 0;
             sum_b = 0;
-            
+
             for (int k = i - 1; k < i + 2 && k < height - 1; k++)
             {
                 if (k >= 0)
@@ -144,18 +144,27 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
                             sum_b = sum_b + temp_b[k][l];
                             count++;
                         }
-                        
-                        
+
+
                     }
-                }    
-                
-                
+                }
             }
-            
-            image[i][j].rgbtRed = round((float)sum_r / count);
-            image[i][j].rgbtGreen = round((float)sum_g / count);
-            image[i][j].rgbtBlue = round((float)sum_b / count);      
+            copy[i][j].rgbtRed = round((float)sum_r / count);
+            copy[i][j].rgbtGreen = round((float)sum_g / count);
+            copy[i][j].rgbtBlue = round((float)sum_b / count);
         }
+    
+    }
+    for (int i = 0; i < height; i++)
+    {
+
+        for (int j = 0; j < width - 1; j++)
+        {
+            image[i][j].rgbtRed=copy[i][j].rgbtRed;
+            image[i][j].rgbtGreen=copy[i][j].rgbtGreen;
+            image[i][j].rgbtBlue=copy[i][j].rgbtBlue;
+        }
+        
     }
     return;
 }
