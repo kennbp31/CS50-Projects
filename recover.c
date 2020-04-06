@@ -48,13 +48,13 @@ int main(int argc, char *argv[])
             if (jpg < 10)
             {
                 sprintf(jpg_name, "00%i.jpg", jpg);
-                printf("%s\n", jpg_name); 
+               // printf("%s\n", jpg_name); 
             }
             
             else if (jpg > 9)
             {
                 sprintf(jpg_name, "0%i.jpg", jpg);
-                printf("%s\n", jpg_name);
+                //printf("%s\n", jpg_name);
             }
             
             to_write = fopen(jpg_name, "a");//open a new file to write too
@@ -69,10 +69,10 @@ int main(int argc, char *argv[])
                  j++;
             }
             
-            printf("File Size:%i\n", file_size);
+            //printf("File Size:%i\n", file_size);
             fclose(to_write);//CLOSE JPEG
             jpg++; //advance jpg naming counter
-            printf("%x %x %x %x \n", mem[i], mem[i+1], mem[i+2], mem[i+3]);
+            //printf("%x %x %x %x \n", mem[i], mem[i+1], mem[i+2], mem[i+3]);
         }
     }
 
