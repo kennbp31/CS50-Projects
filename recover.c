@@ -13,6 +13,13 @@ int main(int argc, char *argv[])
     typedef uint8_t BYTE;
     FILE *file = fopen(argv[1], "r");
     FILE *to_write;//temp location for each jpgs data
+    
+    if (file == NULL)
+    {
+        fclose(file);
+        printf("Unable to open file\n");
+        return 1;
+    }
 
     int b_count = 0;//count # of bytes
     int jpg = 0; //get nameing convention ready
