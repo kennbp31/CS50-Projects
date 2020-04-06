@@ -45,13 +45,21 @@ int main(int argc, char *argv[])
         file_size = 0;
         if (mem[i] == 0xff && mem[i + 1] == 0xd8 && mem[i + 2] == 0xff && (mem[i + 3] & 0xf0) == 0xe0)
         {
-            sprintf(jpg_name, "0%i.jpg", jpg);
-            printf("%s\n", jpg_name);
+            if (jpg < 10)
+            {
+                sprintf(jpg_name, "00%i.jpg", jpg);
+                printf("%s\n", jpg_name); 
+            }
+            
+            else if (jpg > 9)
+            {
+                sprintf(jpg_name, "0%i.jpg", jpg);
+                printf("%s\n", jpg_name);
+            }
+            
             to_write = fopen(jpg_name, "a");//open a new file to write too
             
             int j = i;
-            
-         
             while (!(mem_2[j + 1] == 0xff && mem_2[j + 2] == 0xd8 && mem_2[j + 3] == 0xff && (mem_2[j + 4] & 0xf0) == 0xe0))
             
             {
