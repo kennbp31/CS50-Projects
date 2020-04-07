@@ -34,7 +34,7 @@ int main(int argc, char *argv[])
     
     fread(mem, sizeof(BYTE), b_count, file);
     fclose(file);
-    int j; 
+    int j, l;
     for (int i = 0; i < b_count; i = i + 512)
     {
         if (mem[i] == 0xff && mem[i + 1] == 0xd8 && mem[i + 2] == 0xff && (mem[i + 3] & 0xf0) == 0xe0)
@@ -50,13 +50,18 @@ int main(int argc, char *argv[])
             }
             
             to_write = fopen(jpg_name, "a");//open a new file to write too
-            j = i;
-            while(!(mem[j + 1] == 0xff && mem[j + 2] == 0xd8 && mem[j + 3] == 0xff && (mem[j + 4] & 0xf0) == 0xe0) && j + 4 < b_count)
+            j = i + 512;
+            while(!(mem[j] == 0xff && mem[j + 1] == 0xd8 && mem[j + 2] == 0xff && (mem[j + 3] & 0xf0) == 0xe0) && j + 512 < b_count)
             {
-                fwrite(&mem[j], sizeof(BYTE), 1, to_write);
-                j++;
+                l = j - 512;
+                for (int k = l; k < j; k++)
+                {
+                  fwrite(&mem[k], sizeof(BYTE), 1, to_write);  
+                }
+               
+                j = j + 512;
                 // fputc(mem[j],to_write);
-           }
+            }
             
             
         
