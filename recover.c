@@ -5,10 +5,10 @@
 int main(int argc, char *argv[])
 {
     if (argc != 2) //check that a command line argument was provided
-        {
-            printf("missing command-line argument\n");
-            return 1;
-        }
+    {
+        printf("missing command-line argument\n");
+        return 1;
+    }
 
     typedef uint8_t BYTE;
     FILE *file = fopen(argv[1], "r");
@@ -51,17 +51,17 @@ int main(int argc, char *argv[])
             
             to_write = fopen(jpg_name, "a");//open a new file to write too
             j = i;
-            while(!(mem[j + 1] == 0xff && mem[j + 2] == 0xd8 && mem[j + 3] == 0xff && (mem[j + 4] & 0xf0) == 0xe0) && j < b_count)
+            while (!(mem[j + 1] == 0xff && mem[j + 2] == 0xd8 && mem[j + 3] == 0xff && (mem[j + 4] & 0xf0) == 0xe0) && j < b_count)
             {
                 //l = j - 512;
                 //for (int k = l; k < j; k++)
                 //{
-                  fwrite(&mem[j], sizeof(BYTE), 1, to_write);
+                fwrite(&mem[j], sizeof(BYTE), 1, to_write);
                   
-                  if (mem[j + 2] == 0xff && mem[j + 3] == 0xd8 && mem[j + 4] == 0xff && (mem[j + 5] & 0xf0) == 0xe0)
-                  {
-                      fwrite(&mem[j + 1], sizeof(BYTE), 1, to_write);
-                  }
+                if (mem[j + 2] == 0xff && mem[j + 3] == 0xd8 && mem[j + 4] == 0xff && (mem[j + 5] & 0xf0) == 0xe0)
+                {
+                    fwrite(&mem[j + 1], sizeof(BYTE), 1, to_write);
+                }
                 //}
                
                 j++;
