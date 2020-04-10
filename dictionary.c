@@ -216,7 +216,6 @@ bool unload(void)
         
         i++;
         free(cursor);
-        free(tmp);
     }
     
     return true;
