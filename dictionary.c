@@ -27,7 +27,7 @@ node *table[N];
 // Returns true if word is in dictionary else false
 bool check(const char *word)
 {
-    char * alphabet = "abcdefghijklmnopqrstuvwxyz";
+    char *alphabet = "abcdefghijklmnopqrstuvwxyz";
     int i = 0;
     const char lowdic = tolower(word[0]);
     node *tmp = table[i];
@@ -43,7 +43,7 @@ bool check(const char *word)
             //iterate through the hash table to find the last record
             if (tmp == NULL)
             {
-               return false; 
+                return false; 
             }
             
             while (tmp != NULL)
@@ -55,7 +55,7 @@ bool check(const char *word)
                 }
                 else
                 {
-                tmp = tmp->next;
+                    tmp = tmp->next;
                 }
             }
            
@@ -75,7 +75,7 @@ bool check(const char *word)
 // Hashes word to a number
 unsigned int hash(const char *word)
 {
-    char * alphabet = "abcdefghijklmnopqrstuvwxyz";
+    char *alphabet = "abcdefghijklmnopqrstuvwxyz";
     int i = 0;
     const char lowdic = tolower(word[0]);
     node *tmp = table[i];
@@ -114,12 +114,6 @@ unsigned int hash(const char *word)
             //add the newest word to the end of the hash table
             tmp->next = n;
            
-            //temporary print to confirm we are hashing baby!
-            //for (tmp = table[i] ; tmp != NULL; tmp = tmp->next)
-            //{
-                //printf("NODE! %s\n", tmp->word);
-                
-            //}
             break;
             
         }
@@ -157,15 +151,14 @@ bool load(const char *dictionary)
         //if the next character is not the LF "\n" copy that letter into the next character array
         if (c != 10)
         {
-        word[i] = c;
-        i++;
+            word[i] = c;
+            i++;
         }
         
         //if the current character IS LF, "\n", pass the word array into the hash function, clear out the word, start again.
         if (c == 10)
         {
             i++;
-           // word[i] = '\0';
             hash(word);
             //printf("\n dictionary check %s", word);
             for (int j = 0; j < LENGTH + 1; j++)
@@ -192,7 +185,7 @@ unsigned int size(void)
 // Unloads dictionary from memory, returning true if successful else false
 bool unload(void)
 {
-    char * alphabet = "abcdefghijklmnopqrstuvwxyz";
+    char *alphabet = "abcdefghijklmnopqrstuvwxyz";
     int i = 0;
     node *tmp = table[i];
     node *cursor = table[i];
