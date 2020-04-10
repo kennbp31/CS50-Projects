@@ -179,6 +179,7 @@ bool load(const char *dictionary)
     
     
     //for each word, call the has function and pass it the word in the dictionary
+    fclose(dic);
     return true;
 }
 
