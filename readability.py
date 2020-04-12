@@ -8,8 +8,6 @@ def main():
     sentence_count = sentences(user_in)
     grade = ((0.0588 * ((letter_count / word_count) * 100))  - (0.296 * ((sentence_count / word_count) * 100)) - 15.8)
     
-    #print(f"{(0.0588 * ((letter_count / word_count) * 100))}\n{(0.296 * ((sentence_count / word_count) * 100))}\nGrade temp:",grade)
-    
     if grade < 1:
         print("Before Grade 1")
     elif grade > 16:
@@ -17,8 +15,7 @@ def main():
     else:
         print(f"Grade {round(grade)}")
 
-
-#counts number of spaces in the text
+# counts number of spaces in the text
 def spaces(sent):
     count = 1
     for i in sent:
@@ -27,7 +24,7 @@ def spaces(sent):
     #print("Spaces =", count)
     return(count)
 
-#count letters
+# count letters
 def letters(sent):
     letters = 0
     for i in sent:
@@ -36,7 +33,7 @@ def letters(sent):
     #print("Letters =", letters)
     return(letters)
     
-#count number of sentences
+# count number of sentences
 def sentences(sent):
     sentences = 0
     for i in sent:
