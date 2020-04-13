@@ -3,51 +3,48 @@ import sys
 import time
 import csv
 
+
 def main():
     
-    #make sure command line args were used
+    # make sure command line args were used
     if len(sys.argv) != 3:
         print("Missing Command Line Arguments!")
         sys.exit(1)
 
-    print(f"{sys.argv[1]} {sys.argv[2]}")
-    
     # Function call list
     database = load_databases()
     sequence = load_sequences()
     matches = analyze_sequences(database, sequence)
     find_matches(matches, database)
 
-#Counts the patterns in the DNA sequence provided in the command line
+# Counts the patterns in the DNA sequence provided in the command line
 def analyze_sequences(database, sequence):
 
     #define variables
     matches = [] 
     seq_count = database['ncol']
     
-    
-    #Process to count the number of seq repetitions in the txt files
-    for s in range (seq_count):
+    # Process to count the number of seq repetitions in the txt files
+    for s in range(seq_count):
         matches.append(0)
         cur_seq = database['seqs'][s]
         for i in range(len(sequence)):
-            if sequence[i:i + len(cur_seq)] == cur_seq: # check that the sequence exists
+            if sequence[i:i + len(cur_seq)] == cur_seq:  # check that the sequence exists
                 count = 0
             
-                for j in range(i, len(sequence), len(cur_seq)): # start a new loop that iterates based on size of sequence
-                    if (sequence[j:j + len(cur_seq)] == cur_seq): # for each match, count
+                for j in range(i, len(sequence), len(cur_seq)):  # start a new loop that iterates based on size of sequence
+                    if (sequence[j:j + len(cur_seq)] == cur_seq):  # for each match, count
                         count += 1
 
-                        if (matches[s] < count): #if the new count is greater than the match total, overwrite the match total
-                              matches[s] = count
+                        if (matches[s] < count):  # if the new count is greater than the match total, overwrite the match total
+                            matches[s] = count
                             
-                    elif (sequence[j:j + len(cur_seq)] != cur_seq): #set i to j to continue the search for other repeat sequences
+                    elif (sequence[j:j + len(cur_seq)] != cur_seq):  # set i to j to continue the search for other repeat sequences
                         i = j
                         #print(s1_match, "- total matches thus far")
                         break
             
     return(matches)
-
 
 
 # load the CSV into memory
@@ -57,12 +54,12 @@ def load_databases():
     with open(sys.argv[1], mode='r') as csv_file:
         database = csv.reader(csv_file)
         
-        #set topline of CSV to seq_list array
+        # set topline of CSV to seq_list array
         first_line = csv_file.readline()
-        ncol = (first_line.count(',') + 1) - 1 #count number of collumns
-        seq_list = [] #create an array/list to put the sequences
+        ncol = (first_line.count(',') + 1) - 1  # count number of collumns
+        seq_list = []  # create an array/list to put the sequences
         
-        #create dictionary for peoples names and dna
+        # create dictionary for peoples names and dna
         dna = []
         
         csv_file.seek(0) #return back to the beginning of the CSV
@@ -80,7 +77,7 @@ def load_databases():
     seq_tup = seq_list
     dna_tup = dna
     
-    r = dict();
+    r = dict()
     r['seqs'] = seq_tup
     r['ncol'] = ncol
     r['dna'] = dna_tup
@@ -91,7 +88,6 @@ def load_databases():
 def load_sequences():
    
     seq = open(sys.argv[2], mode='r')
-    #print(seq.read())
     return (seq.read())
 
 
@@ -109,5 +105,6 @@ def find_matches(matches, database):
         if row + 1 == len(database['dna']):
             print("No match")
             return()
+    
     
 main()
