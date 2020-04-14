@@ -4,8 +4,8 @@ import sys
 
 # make sure command line args were used
 if len(sys.argv) != 2:
-        print("Missing Command Line Argument!")
-        sys.exit(1)
+    print("Missing Command Line Argument!")
+    sys.exit(1)
 
 # create empty database and release the connection, will write over if already exists
 open(f"students.db", "w").close()
@@ -34,10 +34,10 @@ with open(sys.argv[1], mode='r') as csv_file:
         if count == 2:
             #print(list[0], list[1], list[2])
             db.execute("INSERT INTO students (first, middle, last, house, birth) VALUES(?, ?, ?, ?, ?)", 
-            list[0], list[1], list[2], row["house"], row["birth"])
+                    list[0], list[1], list[2], row["house"], row["birth"])
             
         # if they only have 2 names, import this. NOTE: None is NULL in SQL
         else:
             #print(list[0], list[1])
             db.execute("INSERT INTO students (first, middle, last, house, birth) VALUES(?, ?, ?, ?, ?)", 
-            list[0], None, list[1], row["house"], row["birth"])
+                    list[0], None, list[1], row["house"], row["birth"])
