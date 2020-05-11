@@ -1,0 +1,86 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Portfolio
+{% endblock %}
+
+{% block main %}
+    <h1 style="padding:20px">Your Portfolio.</h1>
+    <p1>All prices refleced as of now.</p1>
+    <br><br>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Stock Symbol</th>
+                <th scope="col">Company Name</th>
+                <th scope="col">Shares</th>
+                <th scope="col">Current Price</th>
+                <th scope="col">Total Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in rows %}
+            <tr>
+            <td>{{ row["symbol"] }}</td>
+            <td>{{ row["stock_name"] }}</td>
+            <td>{{ row["shares"] }}</td>
+            <td>${{ "%.2f"|format(prices[loop.index - 1]) }}</td>
+            <td>${{ "%.2f"|format((prices[loop.index - 1] * row["shares"])) }}</td>
+            </tr>
+            {% endfor %}
+            <tr><td></td><td></td><td></td><td></td><td></td></tr>
+        </tbody>
+        <tbody style="background-color:yellow">
+            <th scope="row">Totals</th>
+            <td></td>
+            <td><b>User Cash: </b>${{ "%.2f"|format(cash) }}</td>
+            <td><b>Total Stock Value: </b>${{ "%.2f"|format(total) }}</td>
+            <td><b>Portfolio Value: </b>${{ "%.2f"|format(total + cash) }}</td>
+        </tbody>
+    </table>
+    <footer>
+        <table class="tcentered">
+            <td style="padding:10px">
+                <p1><b>Lookup additional Stock Prices</b><br><br></p1>
+                <form action="/quote" method="post">
+                    <div class="form-group" style="margin-right:8%">
+                        <input autocomplete="off" autofocus class="form-control" name="symbol" placeholder="Stock Symbol" type="text">
+                    </div>
+                    <button class="btn btn-primary" type="submit">Submit</button>
+                </form>
+            </td>
+            <td style="padding:10px">
+                <p1><b>Purchase Stocks</b></p1>
+                <form action="/buy" method="post">
+                    <div class="form-group" style="margin-right:8%">
+                        <input autocomplete="off" autofocus class="form-control" name="symbol" placeholder="Stock Symbol" type="text">
+                    </div>
+                    <div class="form-group" style="margin-right:11%">
+                        <input autocomplete="off" autofocus class="form-control" name="shares" placeholder="# of Shares" type="number">
+                    </div>
+                    <button class="btn btn-primary" type="submit">Purchase</button>
+                </form>
+            </td>
+            <td style="padding:10px">
+                <p1><b>Sell Stocks</b></91>
+                <form action="/sell" method="post">
+                    <div class="form-group">
+                        <select class="form-control" name="symbol">
+                            <option disabled="" selected="" value="">Symbol</option>
+                                {% for row in rows %}
+                                <option value={{ row["symbol"] }}>{{ row["symbol"] }}</option>
+                                {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input autocomplete="off" class="form-control" min="0" name="shares" placeholder="Shares" type="number">
+                    </div>
+                    <button class="btn btn-primary" type="submit">Sell</button>
+                </form>
+            </td>
+
+        </table>
+    </footer>
+
+
+{% endblock %}

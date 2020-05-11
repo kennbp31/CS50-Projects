@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Quote
+{% endblock %}
+
+{% block main %}
+    <h1 style="padding:20px">Use the search to lookup Stock Prices</h1>
+    <form action="/quote" method="post">
+        <div class="form-group" style="margin-right:8%">
+            <label>Stock Symbol: </label>
+            <input autocomplete="off" autofocus class="form-control" name="symbol" placeholder="Stock Symbol" type="text">
+        </div>
+        <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
+{% endblock %}
