@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    History
+{% endblock %}
+
+{% block main %}
+    <h1 style="padding:20px">History</h1>
+    <br><br>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Stock Symbol</th>
+                <th scope="col">Company Name</th>
+                <th scope="col">Transaction Type</th>
+                <th scope="col">Shares</th>
+                <th scope="col">Price Per Share</th>
+                <th scope="col">Total Value</th>
+                <th scope="col">Date and Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in rows %}
+            <tr>
+            <td>{{ row["symbol"] }}</td>
+            <td>{{ row["stock_name"] }}</td>
+            {% if row["sold"] == 0 %}
+            <td>Purchase</td>
+            <td>{{ row["shares"] }}</td>
+            {% else %}
+            <td>Sale</td>
+            <td>-{{ row["shares"] }}</td>
+            {% endif %}
+            <td>${{ "%.2f"|format(row["price_per_share"]) }}</td>
+            <td>${{ "%.2f"|format(row["total"]) }}</td>
+            <td>${{ row["date_time"] }}</td>
+            </tr>
+            {% endfor %}
+    </table>
+
+{% endblock %}
